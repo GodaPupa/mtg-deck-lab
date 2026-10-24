@@ -1,0 +1,163 @@
+diff --git a/forge-ai/src/main/java/forge/ai/AiController.java b/forge-ai/src/main/java/forge/ai/AiController.java
+index 2e6e88f6..4626e672 100644
+--- a/forge-ai/src/main/java/forge/ai/AiController.java
++++ b/forge-ai/src/main/java/forge/ai/AiController.java
+@@ -1446,6 +1446,11 @@ public class AiController {
+             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
+         }
+ 
++        final SpellAbility sacSave = SpecialAiLogic.sacrificeThreatenedInResponse(player);   // [referee patch]
++        if (sacSave != null) {
++            return singleSpellAbilityList(sacSave);
++        }
++
+         CardCollection playBeforeLand = CardLists.filter(
+                 player.getCardsIn(ZoneType.Hand), CardPredicates.hasSVar("PlayBeforeLandDrop")
+         );
+diff --git a/forge-ai/src/main/java/forge/ai/SpecialAiLogic.java b/forge-ai/src/main/java/forge/ai/SpecialAiLogic.java
+index 9b514a68..55a4e055 100644
+--- a/forge-ai/src/main/java/forge/ai/SpecialAiLogic.java
++++ b/forge-ai/src/main/java/forge/ai/SpecialAiLogic.java
+@@ -15,6 +15,11 @@ import forge.game.phase.PhaseType;
+ import forge.game.player.Player;
+ import forge.game.spellability.SpellAbility;
+ import forge.game.zone.ZoneType;
++import forge.game.GameObject;
++import forge.game.cost.Cost;
++import forge.game.cost.CostPart;
++import forge.game.cost.CostSacrifice;
++import forge.game.cost.CostPayment;
+ import forge.util.Aggregates;
+ import forge.util.Expressions;
+ 
+@@ -422,4 +427,51 @@ public class SpecialAiLogic {
+         // haste might not be good enough?
+         return false;
+     }
+-}
+\ No newline at end of file
++
++    // [referee patch] Aristocrats play: when an opponent's spell or ability on top of the stack is about to remove
++    // one of our creatures, sacrifice that creature to a free outlet in response so death triggers still happen.
++    // Non-mana outlets (Viscera Seer, Carrion Feeder...) are returned to be played normally; a free mana outlet
++    // (Ashnod's Altar) is activated directly, since mana abilities don't use the stack. Returns null to fall through.
++    public static SpellAbility sacrificeThreatenedInResponse(final Player ai) {
++        final Game game = ai.getGame();
++        if (game.getStack().isEmpty()) return null;
++        final SpellAbility top = game.getStack().peekAbility();
++        if (top == null || top.getActivatingPlayer() == null || !top.getActivatingPlayer().isOpponentOf(ai)) return null;
++        Card victim = null;
++        for (GameObject o : ComputerUtil.predictThreatenedObjects(ai, null, true)) {
++            if (o instanceof Card) {
++                Card c = (Card) o;
++                if (c.isCreature() && c.getController().equals(ai) && c.isInPlay() && !c.isCommander()) {
++                    if (victim == null || ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(victim)) victim = c;
++                }
++            }
++        }
++        if (victim == null) return null;
++        SpellAbility manaOutlet = null;
++        for (Card outlet : ai.getCardsIn(ZoneType.Battlefield)) {
++            for (SpellAbility sa : outlet.getSpellAbilities()) {
++                if (!sa.isActivatedAbility() && !sa.isManaAbility()) continue;
++                final Cost cost = sa.getPayCosts();
++                if (cost == null || cost.hasManaCost() || cost.hasTapCost() || cost.getCostParts().size() != 1) continue;
++                final CostPart part = cost.getCostParts().get(0);
++                if (!(part instanceof CostSacrifice) || part.payCostFromSource() || !part.getType().startsWith("Creature")) continue;
++                if (outlet.equals(victim) && !part.getType().contains("Other")) { /* sacrificing itself is fine */ }
++                if (part.getType().contains("Other") && outlet.equals(victim)) continue;
++                sa.setActivatingPlayer(ai);
++                if (!sa.canPlay()) continue;
++                if (sa.isManaAbility()) { if (manaOutlet == null) manaOutlet = sa; continue; }
++                victim.setSVar("SacMe", "6");   // make the cost payment pick the threatened creature
++                return sa;
++            }
++        }
++        if (manaOutlet != null) {
++            victim.setSVar("SacMe", "6");
++            final CostPayment pay = new CostPayment(manaOutlet.getPayCosts(), manaOutlet);
++            if (pay.payComputerCosts(new AiCostDecision(ai, manaOutlet, false))) {
++                AbilityUtils.resolve(manaOutlet);
++            }
++            if (victim.isInPlay()) victim.removeSVar("SacMe");
++        }
++        return null;
++    }
++}
+diff --git a/forge-game/src/main/java/forge/game/GameLogFormatter.java b/forge-game/src/main/java/forge/game/GameLogFormatter.java
+index f782187d..ea1bafab 100644
+--- a/forge-game/src/main/java/forge/game/GameLogFormatter.java
++++ b/forge-game/src/main/java/forge/game/GameLogFormatter.java
+@@ -315,6 +315,18 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
+             return new GameLogEntry(GameLogEntryType.ANTE,
+                     (c != null ? c.getOwner() + " anted " + c : "a card was anted"));
+         }
++        // [referee patch] also log permanents entering the battlefield from anywhere but the stack
++        // (tutors like Green Sun's Zenith, reanimation, blink), and leaving it for hand or library.
++        if (to == ZoneType.Battlefield && from != ZoneType.Stack && from != ZoneType.Battlefield) {
++            final CardView c = ev.card();
++            final String who = c != null && c.getController() != null ? c.getController().toString() : "?";
++            return new GameLogEntry(GameLogEntryType.ZONE_CHANGE,
++                    "ENTER " + who + " :: " + (c != null ? c.getName() : "a card") + " from " + from, c);
++        }
++        if (from == ZoneType.Battlefield && (to == ZoneType.Hand || to == ZoneType.Library)) {
++            final String cardName = ev.card() != null ? ev.card().toString() : "a card";
++            return new GameLogEntry(GameLogEntryType.ZONE_CHANGE, localizer.getMessage("lblLogZoneChange", cardName, to, from), ev.card());
++        }
+         // Only log Battlefield -> Graveyard/Exile to avoid duplicating entries
+         // already covered by other events (land played, spell cast, discard, etc.)
+         if (from != ZoneType.Battlefield || (to != ZoneType.Graveyard && to != ZoneType.Exile)) {
+diff --git a/forge-gui/res/cardsfolder/h/hangarback_walker.txt b/forge-gui/res/cardsfolder/h/hangarback_walker.txt
+index 695d2979..7c0f5f72 100644
+--- a/forge-gui/res/cardsfolder/h/hangarback_walker.txt
++++ b/forge-gui/res/cardsfolder/h/hangarback_walker.txt
+@@ -10,3 +10,4 @@ A:AB$ PutCounter | Cost$ 1 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescript
+ SVar:X:Count$xPaid
+ DeckHas:Ability$Token
+ Oracle:Hangarback Walker enters with X +1/+1 counters on it.\nWhen Hangarback Walker dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on Hangarback Walker.\n{1}, {T}: Put a +1/+1 counter on Hangarback Walker.
++SVar:SacMe:4
+diff --git a/forge-gui/res/tokenscripts/c_0_1_eldrazi_spawn_sac.txt b/forge-gui/res/tokenscripts/c_0_1_eldrazi_spawn_sac.txt
+index fbcd967d..e3cf410e 100644
+--- a/forge-gui/res/tokenscripts/c_0_1_eldrazi_spawn_sac.txt
++++ b/forge-gui/res/tokenscripts/c_0_1_eldrazi_spawn_sac.txt
+@@ -4,3 +4,4 @@ Types:Creature Eldrazi Spawn
+ PT:0/1
+ A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+ Oracle:Sacrifice this creature: Add {C}.
++SVar:SacMe:5
+diff --git a/forge-gui/res/tokenscripts/c_1_1_a_servo.txt b/forge-gui/res/tokenscripts/c_1_1_a_servo.txt
+index 346b023f..672021a0 100644
+--- a/forge-gui/res/tokenscripts/c_1_1_a_servo.txt
++++ b/forge-gui/res/tokenscripts/c_1_1_a_servo.txt
+@@ -3,3 +3,4 @@ ManaCost:no cost
+ Types:Artifact Creature Servo
+ PT:1/1
+ Oracle:
++SVar:SacMe:4
+diff --git a/forge-gui/res/tokenscripts/c_1_1_a_thopter_flying.txt b/forge-gui/res/tokenscripts/c_1_1_a_thopter_flying.txt
+index 65272c63..f8f03c72 100644
+--- a/forge-gui/res/tokenscripts/c_1_1_a_thopter_flying.txt
++++ b/forge-gui/res/tokenscripts/c_1_1_a_thopter_flying.txt
+@@ -5,3 +5,4 @@ Types:Artifact Creature Thopter
+ PT:1/1
+ K:Flying
+ Oracle:Flying
++SVar:SacMe:3
+diff --git a/forge-gui/res/tokenscripts/g_1_1_squirrel.txt b/forge-gui/res/tokenscripts/g_1_1_squirrel.txt
+index 2b1f57ea..511f1426 100644
+--- a/forge-gui/res/tokenscripts/g_1_1_squirrel.txt
++++ b/forge-gui/res/tokenscripts/g_1_1_squirrel.txt
+@@ -4,3 +4,4 @@ Colors:green
+ Types:Creature Squirrel
+ PT:1/1
+ Oracle:
++SVar:SacMe:3
+diff --git a/forge-gui/res/tokenscripts/w_0_1_goat.txt b/forge-gui/res/tokenscripts/w_0_1_goat.txt
+index e40525ba..4d0d3384 100644
+--- a/forge-gui/res/tokenscripts/w_0_1_goat.txt
++++ b/forge-gui/res/tokenscripts/w_0_1_goat.txt
+@@ -4,3 +4,4 @@ Colors:white
+ Types:Creature Goat
+ PT:0/1
+ Oracle:
++SVar:SacMe:5

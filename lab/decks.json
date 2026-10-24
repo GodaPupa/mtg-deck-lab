@@ -1,0 +1,11 @@
+{
+  "_comment": "Registry of our decks. name = the Name= line in the .dck file (what Forge logs). list = grouped JSON list. key = cards that must be on the battlefield for any of the deck's combos (usually the commander). keycards = Forge tutor priority, written into the .dck as KeyCards=.",
+  "Grand Audit":   {"list": "decks/lists/lf4.json",    "key": ["Long Feng, Grand Secretariat"], "dck": "Grand_Audit"},
+  "GA Ashnod":     {"list": "decks/lists/lf_ash.json", "key": ["Long Feng, Grand Secretariat"], "dck": "GA_Ashnod"},
+  "GA Recursion":  {"list": "decks/lists/lf_rec.json", "key": ["Long Feng, Grand Secretariat"], "dck": "GA_Recursion"},
+  "GA Upgraded":   {"list": "decks/lists/upA.json",    "key": ["Long Feng, Grand Secretariat"], "dck": "GA_Upgraded"},
+  "GA Value":      {"list": "decks/lists/upB.json",    "key": ["Long Feng, Grand Secretariat"], "dck": "GA_Value"},
+  "GA Protected":  {"list": "decks/lists/lfP.json",    "key": ["Long Feng, Grand Secretariat"], "dck": "GA_Protected"},
+  "Plunder Loop":  {"list": "decks/lists/mt2.json",    "key": ["Malcolm, Keen-Eyed Navigator"], "dck": "Plunder_Loop",
+                    "no_same_turn": ["Glint-Horn Buccaneer"]}
+}

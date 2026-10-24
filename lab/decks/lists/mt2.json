@@ -1,0 +1,109 @@
+{
+"Commander": [
+"Malcolm, Keen-Eyed Navigator",
+"Tana, the Bloodsower"
+],
+"Combo creatures": [
+"Glint-Horn Buccaneer",
+"Shao Jun",
+"Havoc Jester"
+],
+"Make them Pirates": [
+"Runed Stalactite",
+"Amorphous Axe",
+"Maskwood Nexus",
+"Arcane Adaptation",
+"Amoeboid Changeling",
+"Unnatural Selection"
+],
+"Backup combo": [
+"Dualcaster Mage",
+"Twinflame",
+"Heat Shimmer"
+],
+"Tutors": [
+"Chord of Calling",
+"Eldritch Evolution",
+"Neoform",
+"Fauna Shaman",
+"Drift of Phantasms",
+"Signal the Clans",
+"Long-Term Plans",
+"Trinket Mage",
+"Tribute Mage",
+"Fabricate",
+"Muddle the Mixture",
+"Nature's Rhythm",
+"Formidable Speaker"
+],
+"Pirates (Treasure in combat)": [
+"Professional Face-Breaker",
+"Breeches, Eager Pillager",
+"Spectral Sailor",
+"Siren Stormtamer"
+],
+"Card draw": [
+"Ponder",
+"Preordain",
+"Brainstorm",
+"Consider",
+"Opt",
+"Curiosity",
+"Tandem Lookout",
+"Eternal Witness"
+],
+"Ramp": [
+"Sol Ring",
+"Arcane Signet",
+"Fellwar Stone",
+"Mind Stone",
+"Talisman of Creativity",
+"Talisman of Curiosity",
+"Talisman of Impulse",
+"Llanowar Elves",
+"Elvish Mystic",
+"Fyndhorn Elves",
+"Birds of Paradise",
+"Utopia Sprawl",
+"Simian Spirit Guide"
+],
+"Protection": [
+"Blossoming Defense",
+"Snakeskin Veil",
+"Tamiyo's Safekeeping",
+"Veil of Summer",
+"Counterspell",
+"An Offer You Can't Refuse",
+"Negate",
+"Dispel"
+],
+"Removal": [
+"Lightning Bolt",
+"Abrade",
+"Pongify",
+"Rapid Hybridization",
+"Beast Within",
+"Chaos Warp",
+"Nature's Claim",
+"Arcane Denial"
+],
+"Lands": [
+"Command Tower",
+"Exotic Orchard",
+"Hinterland Harbor",
+"Karplusan Forest",
+"Rootbound Crag",
+"Shivan Reef",
+"Sulfur Falls",
+"Yavimaya Coast",
+"Cinder Glade",
+"Spire of Industry",
+"Waterlogged Grove",
+"Frontier Bivouac",
+"Frostboil Snarl",
+"Vineglimmer Snarl",
+"6 Forest",
+"6 Mountain",
+"6 Island"
+]
+}

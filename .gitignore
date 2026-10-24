@@ -1,0 +1,4 @@
+lab/bulk/
+lab/runs/
+lab/__pycache__/
+*.pyc

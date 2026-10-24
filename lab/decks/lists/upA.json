@@ -1,0 +1,109 @@
+{
+ "Commander": [
+  "Long Feng, Grand Secretariat"
+ ],
+ "Loop makers": [
+  "Basking Broodscale",
+  "Scurry Oak",
+  "Herd Baloth",
+  "Walking Ballista",
+  "Evolution Witness"
+ ],
+ "Free sacrifice outlets": [
+  "Viscera Seer",
+  "Carrion Feeder",
+  "Yahenni, Undying Partisan",
+  "Umbral Collar Zealot"
+ ],
+ "Death payoffs": [
+  "Blood Artist",
+  "Zulaport Cutthroat",
+  "Poison-Tip Archer",
+  "Bastion of Remembrance",
+  "Vindictive Vampire",
+  "Marionette Apprentice",
+  "Mirkwood Bats",
+  "Pawn of Ulamog",
+  "Falkenrath Noble",
+  "Syr Konrad, the Grim"
+ ],
+ "Fodder & recursion": [],
+ "Land sacrifice": [
+  "Sakura-Tribe Elder",
+  "Springbloom Druid",
+  "Harrow",
+  "Roiling Regrowth",
+  "Entish Restoration"
+ ],
+ "Draw": [
+  "Skullclamp",
+  "Deadly Dispute",
+  "Village Rites"
+ ],
+ "Tutors": [
+  "Chord of Calling",
+  "Eldritch Evolution",
+  "Summoner's Pact",
+  "Fauna Shaman",
+  "Diabolic Tutor",
+  "Shared Summons",
+  "Beseech the Queen",
+  "Nature's Rhythm",
+  "Dina's Guidance",
+  "Formidable Speaker",
+  "Green Sun's Zenith",
+  "Diabolic Intent",
+  "Finale of Devastation",
+  "Emeritus of Woe // Demonic Tutor"
+ ],
+ "Ramp": [
+  "Sol Ring",
+  "Arcane Signet",
+  "Golgari Signet",
+  "Talisman of Resilience",
+  "Llanowar Elves",
+  "Elvish Mystic",
+  "Elves of Deep Shadow",
+  "Nature's Lore",
+  "Three Visits",
+  "Birds of Paradise",
+  "Utopia Sprawl",
+  "Delighted Halfling",
+  "Fyndhorn Elves"
+ ],
+ "Interaction": [
+  "Assassin's Trophy",
+  "Abrupt Decay",
+  "Putrefy",
+  "Infernal Grasp",
+  "Beast Within",
+  "Feed the Swarm",
+  "Pernicious Deed",
+  "Black Sun's Zenith"
+ ],
+ "Protection": [
+  "Heroic Intervention",
+  "Snakeskin Veil",
+  "Blossoming Defense",
+  "Veil of Summer"
+ ],
+ "Lands": [
+  "Command Tower",
+  "Evolving Wilds",
+  "Terramorphic Expanse",
+  "Fabled Passage",
+  "Myriad Landscape",
+  "Blighted Woodland",
+  "Escape Tunnel",
+  "Woodland Cemetery",
+  "Llanowar Wastes",
+  "Jungle Hollow",
+  "Golgari Guildgate",
+  "Twilight Mire",
+  "Overgrown Tomb",
+  "Reliquary Tower",
+  "Bojuka Bog",
+  "10 Forest",
+  "8 Swamp"
+ ]
+}
