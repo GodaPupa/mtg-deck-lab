@@ -58,3 +58,15 @@ Both cut Three Visits and Harrow.
 - Interaction tied overall but added 4 combo wins. Forge's AI aimed the removal badly (mana elves, Siren Stormtamer), not at Glint-Horn or Malcolm,
   so a human pilot should get more from it. Cutting two ramp spells cost nothing.
 - The list looks close to a local optimum for this AI. Single swaps move it within noise.
+
+## Lean vs Shielded (combo-aware removal targeting + looser protection gate; 20 pods, seed 51, 60 games each)
+Both cut Arcane Signet and Golgari Signet (ramp 12 to 10).
+| Version | Win rate | Combo wins | vs main (wins/pod) |
+|---|---|---|---|
+| Main (Ashnod's + Fatal Push/Tragic Slip) | 30% ±12 | 15 | - |
+| **Lean: + Go for the Throat, Heartless Act** | **44% ±13** | 25 | +0.40 (se 0.27) |
+| Shielded: + Veil of Summer, Blossoming Defense | 22% ±10 | 13 | -0.25 (se 0.19) |
+- Opponents now aim removal at Long Feng and Broodscale, so every version's rate dropped. That's a tougher, more realistic table.
+- Extra cheap removal is the best use of the slots so far. Protection still barely gets cast (1–2 per 60 games): the hold rule passes,
+  but Forge's own protection AI rarely chooses to respond. A known gap.
+- Confirmation run (24 new pods, seed 61) started to check the Lean lead.
