@@ -101,5 +101,12 @@
       "Long Feng, Grand Secretariat"
     ],
     "dck": "GA_LDraw"
+  },
+  "GA LBoth": {
+    "list": "decks/lists/lf_lboth.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_LBoth"
   }
 }

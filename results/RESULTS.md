@@ -80,3 +80,13 @@ Next test: "Leaner" (8 ramp, 14 removal: -Talisman of Resilience, -Nature's Lore
 Leaner (-Talisman of Resilience, -Nature's Lore, +Cut Down, +Bone Shards; 8 ramp, 14 removal): 31% vs Lean 33%, -0.08 wins/pod (se 0.25), a tie.
 Leaner lost to Plunder Loop less (15 vs 21) but to Ur-Dragon more (11 vs 5), and failed to cast Long Feng in 8 losses vs 6.
 **10 ramp / 12 removal (Lean) is the sweet spot. Lean stays main.**
+
+## Realistic pods: 3 random rivals, no fixed Plunder Loop (protect-in-response AI; 20 pods, seed 91, 60 games each)
+| Version | Win rate | Combo wins | Protection casts | vs Lean (wins/pod) |
+|---|---|---|---|---|
+| Lean (main) | 33% ±12 | 19 | 4 | - |
+| **+Shield: -Ugin's Conjurant, -Endless One, +Veil of Summer, +Blossoming Defense** | **43% ±13** | 20 | 15 | +0.30 (se 0.24) |
+| +Draw: same cuts, +Midnight Reaper, +Grim Haruspex | 37% ±12 | 21 | 8 | +0.10 (se 0.18) |
+- **Realistic baseline: Lean wins 33% of random four-player pods** (25% = average seat). Only Edgar did better (42%, in 24 games).
+- The protection fix works: protection was cast 15 times in 60 games (vs 1-2 before), and Shield is the best version so far in random pods.
+- Draw engines help a little but are within noise. Confirmation run (seed 101): Lean vs Shield vs Shield+Draw ("LBoth", also cuts Zulaport Cutthroat, Bastion of Remembrance).
