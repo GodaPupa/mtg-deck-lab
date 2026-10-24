@@ -87,5 +87,19 @@
       "Long Feng, Grand Secretariat"
     ],
     "dck": "GA_Leaner"
+  },
+  "GA LShield": {
+    "list": "decks/lists/lf_lshield.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_LShield"
+  },
+  "GA LDraw": {
+    "list": "decks/lists/lf_ldraw.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_LDraw"
   }
 }

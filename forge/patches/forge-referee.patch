@@ -1,5 +1,5 @@
 diff --git a/forge-ai/src/main/java/forge/ai/AiController.java b/forge-ai/src/main/java/forge/ai/AiController.java
-index 2e6e88f6..eaeed21a 100644
+index 2e6e88f6..404b95c2 100644
 --- a/forge-ai/src/main/java/forge/ai/AiController.java
 +++ b/forge-ai/src/main/java/forge/ai/AiController.java
 @@ -901,6 +901,10 @@ public class AiController {
@@ -13,10 +13,14 @@ index 2e6e88f6..eaeed21a 100644
          final Card card = sa.getHostCard();
  
          // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
-@@ -1446,6 +1450,11 @@ public class AiController {
+@@ -1446,6 +1450,15 @@ public class AiController {
              return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
          }
  
++        final SpellAbility protect = ComboAwareAi.protectInResponse(player);   // [deck-lab patch] protect before sacrificing
++        if (protect != null) {
++            return singleSpellAbilityList(protect);
++        }
 +        final SpellAbility sacSave = SpecialAiLogic.sacrificeThreatenedInResponse(player);   // [referee patch]
 +        if (sacSave != null) {
 +            return singleSpellAbilityList(sacSave);
@@ -27,10 +31,10 @@ index 2e6e88f6..eaeed21a 100644
          );
 diff --git a/forge-ai/src/main/java/forge/ai/ComboAwareAi.java b/forge-ai/src/main/java/forge/ai/ComboAwareAi.java
 new file mode 100644
-index 00000000..cbddc226
+index 00000000..401cde5a
 --- /dev/null
 +++ b/forge-ai/src/main/java/forge/ai/ComboAwareAi.java
-@@ -0,0 +1,124 @@
+@@ -0,0 +1,171 @@
 +package forge.ai;
 +
 +import forge.game.RefereeCombos;
@@ -153,6 +157,53 @@ index 00000000..cbddc226
 +        }
 +        if (best == Integer.MAX_VALUE) return bonus + 100;
 +        return bonus + (best == 0 ? 900 : best == 1 ? 500 : 250);
++    }
++
++    /**
++     * Cast a protection spell in response when an opponent's spell or ability targets or threatens our commander or a
++     * combo piece. Returns the spell with its target chosen, or null. Tried before sacrifice-in-response.
++     */
++    public static SpellAbility protectInResponse(Player ai) {
++        final RefereeCombos.Deck d = RefereeCombos.deckOf(ai);
++        if (d == null || d.protection.isEmpty()) return null;
++        final forge.game.Game game = ai.getGame();
++        if (game.getStack().isEmpty()) return null;
++        final SpellAbility top = game.getStack().peekAbility();
++        if (top == null || top.getActivatingPlayer() == null || !top.getActivatingPlayer().isOpponentOf(ai)) return null;
++        Card victim = null;
++        if (top.usesTargeting() && top.getTargets() != null) {
++            for (Object t : top.getTargets()) {
++                if (t instanceof Card) {
++                    Card c = (Card) t;
++                    if (c.getController().equals(ai) && (d.key.contains(c.getName()) || d.pieces.contains(c.getName()))) { victim = c; break; }
++                }
++            }
++        }
++        if (victim == null) {
++            for (GameObject o : ComputerUtil.predictThreatenedObjects(ai, null, true)) {
++                if (o instanceof Card) {
++                    Card c = (Card) o;
++                    if (c.getController().equals(ai) && (d.key.contains(c.getName()) || d.pieces.contains(c.getName()))) {
++                        if (victim == null || d.key.contains(c.getName())) victim = c;
++                    }
++                }
++            }
++        }
++        if (victim == null) return null;
++        for (Card card : ai.getCardsIn(ZoneType.Hand)) {
++            if (!d.protection.contains(card.getName())) continue;
++            for (SpellAbility sa : card.getSpellAbilities()) {
++                sa.setActivatingPlayer(ai);
++                if (!sa.canPlay() || !ComputerUtilCost.canPayCost(sa, ai, false)) continue;
++                if (sa.usesTargeting()) {
++                    sa.resetTargets();
++                    if (!sa.canTarget(victim)) continue;
++                    sa.getTargets().add(victim);
++                }
++                return sa;
++            }
++        }
++        return null;
 +    }
 +}
 diff --git a/forge-ai/src/main/java/forge/ai/ComputerUtil.java b/forge-ai/src/main/java/forge/ai/ComputerUtil.java

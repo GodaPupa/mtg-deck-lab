@@ -66,6 +66,8 @@ AI:
 7. **Protection discipline:** a deck's protection spells (its list's "Protection" group) are held until an opponent's spell or ability
    targets or threatens a combo piece or the commander (or targets our spell).
 8. **Combo-aware mulligans:** a 7-card opening hand with no combo piece and no tutor is mulliganed (free mulligan).
+10. **Protect in response:** when an opponent's spell or ability targets or threatens the commander or a combo piece, cast a held
+   protection spell (Snakeskin Veil, Heroic Intervention, Veil of Summer, Blossoming Defense) on it, before falling back to sacrificing it.
 9. **Combo-aware removal targeting:** removal (destroy, exile, -X/-X) ranks an opponent's known combo pieces and commanders first,
    with a bigger bonus the closer that combo is to done. It applies to every AI, so opponents aim at your engine too.
 
