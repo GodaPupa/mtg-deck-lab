@@ -44,6 +44,10 @@ python3 compare.py runs/new/GA_Ashnod runs/new/GA_New
 
 About 45 seconds per game with 2 workers. 42 games per version gives roughly ±14 points, so only trust big gaps, or run more pods.
 
+**Speed:** the slowest 10% of games (trigger-heavy boards like Ur-Dragon) take ~45% of run time, so `pods.py` caps games at 180 s
+(`--timeout`), which cuts total time by about a quarter. Games are CPU-bound (one core per Forge process), so `--workers` should match
+your CPU count. A machine with 8 cores runs about 4x faster than the 2-core cloud box.
+
 ## Forge patches (`forge/patches/forge-referee.patch`)
 
 1. **Battlefield logging:** Forge only logged permanents *leaving* play. Now it logs any permanent entering from anywhere but the stack

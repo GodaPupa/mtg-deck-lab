@@ -20,7 +20,7 @@ ap.add_argument("--rivals", type=int, default=2); ap.add_argument("--pods", type
 ap.add_argument("--seed", type=int, default=7); ap.add_argument("--games", type=int, default=3)
 ap.add_argument("--workers", type=int, default=2); ap.add_argument("--out", required=True)
 ap.add_argument("--forge", default=os.environ.get("FORGE_DIR", os.path.expanduser("~/forge")))
-ap.add_argument("--timeout", type=int, default=600, help="Forge per-game time limit in seconds")
+ap.add_argument("--timeout", type=int, default=180, help="Forge per-game time limit in seconds (180 cuts run time ~25%%; slowest 11%% of games are scored as of the cutoff)")
 a = ap.parse_args()
 JAR = os.path.join(a.forge, "forge-gui-desktop/target/forge-gui-desktop-2.0.16-SNAPSHOT-jar-with-dependencies.jar")
 if not os.path.exists(JAR):
