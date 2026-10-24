@@ -70,3 +70,8 @@ Both cut Arcane Signet and Golgari Signet (ramp 12 to 10).
 - Extra cheap removal is the best use of the slots so far. Protection still barely gets cast (1–2 per 60 games): the hold rule passes,
   but Forge's own protection AI rarely chooses to respond. A known gap.
 - Confirmation run (24 new pods, seed 61) started to check the Lean lead.
+
+## Confirmation: Lean vs 12-ramp main (24 new pods, seed 61, 72 games each)
+Lean 50% vs main 26% (+0.71 wins/pod, se 0.19). **Pooled over both runs (44 pods): Lean 47% (62/131) vs main 28% (37/132),
++0.57 wins/pod, se 0.16, z = 3.5.** The most decisive result so far. **Lean is the new main list** (`lf_lean.json`, ~$135, 10 ramp, 12 removal).
+Next test: "Leaner" (8 ramp, 14 removal: -Talisman of Resilience, -Nature's Lore, +Cut Down, +Bone Shards).
