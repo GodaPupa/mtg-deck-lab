@@ -64,8 +64,10 @@ AI:
 5. **Sacrifice hints:** `SacMe` on Spawn, Goat, Servo, Thopter and Squirrel tokens and Hangarback, so the AI sacrifices fodder, not payoffs.
 6. **Sacrifice-for-mana:** outlets like Ashnod's Altar count as normal mana sources while spare fodder tokens exist.
 7. **Protection discipline:** a deck's protection spells (its list's "Protection" group) are held until an opponent's spell or ability
-   threatens a combo piece or the commander (or targets our spell).
+   targets or threatens a combo piece or the commander (or targets our spell).
 8. **Combo-aware mulligans:** a 7-card opening hand with no combo piece and no tutor is mulliganed (free mulligan).
+9. **Combo-aware removal targeting:** removal (destroy, exile, -X/-X) ranks an opponent's known combo pieces and commanders first,
+   with a bigger bonus the closer that combo is to done. It applies to every AI, so opponents aim at your engine too.
 
 After changing decks or `decks.json`, rerun `python3 export_combos.py` so the engine knows the combos.
 

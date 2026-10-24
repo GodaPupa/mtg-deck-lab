@@ -64,6 +64,21 @@
     "key": [
       "Long Feng, Grand Secretariat"
     ],
-    "dck": "GA_Interaction"
+    "dck": "GA_Interaction",
+    "_note": "main list"
+  },
+  "GA Lean": {
+    "list": "decks/lists/lf_lean.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Lean"
+  },
+  "GA Shielded": {
+    "list": "decks/lists/lf_shield.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Shielded"
   }
 }

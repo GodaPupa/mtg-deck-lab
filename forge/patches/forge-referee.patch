@@ -27,10 +27,10 @@ index 2e6e88f6..eaeed21a 100644
          );
 diff --git a/forge-ai/src/main/java/forge/ai/ComboAwareAi.java b/forge-ai/src/main/java/forge/ai/ComboAwareAi.java
 new file mode 100644
-index 00000000..8783798e
+index 00000000..cbddc226
 --- /dev/null
 +++ b/forge-ai/src/main/java/forge/ai/ComboAwareAi.java
-@@ -0,0 +1,96 @@
+@@ -0,0 +1,124 @@
 +package forge.ai;
 +
 +import forge.game.RefereeCombos;
@@ -112,6 +112,14 @@ index 00000000..8783798e
 +        if (game.getStack().isEmpty()) return true;
 +        final SpellAbility top = game.getStack().peekAbility();
 +        if (top == null || top.getActivatingPlayer() == null || !top.getActivatingPlayer().isOpponentOf(ai)) return true;
++        if (top.usesTargeting() && top.getTargets() != null) {
++            for (Object t : top.getTargets()) {
++                if (t instanceof Card) {
++                    Card c = (Card) t;
++                    if (c.getController().equals(ai) && (d.pieces.contains(c.getName()) || d.key.contains(c.getName()))) return false;
++                }
++            }
++        }
 +        for (GameObject o : ComputerUtil.predictThreatenedObjects(ai, null, true)) {
 +            if (o instanceof Card) {
 +                Card c = (Card) o;
@@ -125,6 +133,26 @@ index 00000000..8783798e
 +            }
 +        }
 +        return true;
++    }
++
++    /**
++     * Removal priority bonus for an opponent's card: a piece of one of its controller's known combos (bigger the
++     * closer that combo is to done), or a commander. Real players know the engine card is the one to kill.
++     */
++    public static int comboThreatBonus(Card c) {
++        int bonus = c.isCommander() ? 150 : 0;
++        final RefereeCombos.Deck d = RefereeCombos.deckOf(c.getController());
++        if (d == null || !(d.pieces.contains(c.getName()) || d.key.contains(c.getName()))) return bonus;
++        if (d.key.contains(c.getName())) bonus += 200;
++        final Set<String> onField = new HashSet<>();
++        for (Card x : c.getController().getCardsIn(ZoneType.Battlefield)) onField.add(x.getName());
++        int best = Integer.MAX_VALUE;
++        for (Set<String> combo : d.combos) {
++            if (!combo.contains(c.getName())) continue;
++            best = Math.min(best, missing(combo, onField, null));
++        }
++        if (best == Integer.MAX_VALUE) return bonus + 100;
++        return bonus + (best == 0 ? 900 : best == 1 ? 500 : 250);
 +    }
 +}
 diff --git a/forge-ai/src/main/java/forge/ai/ComputerUtil.java b/forge-ai/src/main/java/forge/ai/ComputerUtil.java
@@ -141,6 +169,18 @@ index e74077e8..1ade13aa 100644
          return !handList.isEmpty() && scoreHand(handList, ai, cardsToReturn) <= 0;
      }
  
+diff --git a/forge-ai/src/main/java/forge/ai/ComputerUtilCard.java b/forge-ai/src/main/java/forge/ai/ComputerUtilCard.java
+index 4b0d9914..a46c4d06 100644
+--- a/forge-ai/src/main/java/forge/ai/ComputerUtilCard.java
++++ b/forge-ai/src/main/java/forge/ai/ComputerUtilCard.java
+@@ -609,6 +609,7 @@ public class ComputerUtilCard {
+ 
+         if (c.getController().isOpponentOf(ai)) {
+             value += ComputerUtil.evaluateBoardPosition(ai, c.getController()) / 4;
++            value += ComboAwareAi.comboThreatBonus(c);   // [deck-lab patch] known combo pieces and commanders first
+         }
+         return value;
+     }
 diff --git a/forge-ai/src/main/java/forge/ai/ComputerUtilMana.java b/forge-ai/src/main/java/forge/ai/ComputerUtilMana.java
 index fb628677..8a14a107 100644
 --- a/forge-ai/src/main/java/forge/ai/ComputerUtilMana.java
@@ -247,6 +287,20 @@ index c9e8d8c6..31d22792 100644
          if (sa.hasParam("AILogic")) {
              String logic = sa.getParamOrDefault("AILogic", "");
              if ("NeverBounceItself".equals(logic)) {
+diff --git a/forge-ai/src/main/java/forge/ai/ability/PumpAi.java b/forge-ai/src/main/java/forge/ai/ability/PumpAi.java
+index cc8e6881..ef1c54d7 100644
+--- a/forge-ai/src/main/java/forge/ai/ability/PumpAi.java
++++ b/forge-ai/src/main/java/forge/ai/ability/PumpAi.java
+@@ -537,7 +537,8 @@ public class PumpAi extends PumpAiBase {
+                 }
+             }
+ 
+-            t = ComputerUtilCard.getBestAI(list);
++            // [deck-lab patch] shrink/kill effects (Tragic Slip) use removal priority, which ranks known combo pieces first
++            t = sa.isCurse() ? ComputerUtilCard.getBestRemovalTargetAI(ai, list) : ComputerUtilCard.getBestAI(list);
+             //option to hold removal instead only applies for single targeted removal
+             if (!immediately && sa.getMaxTargets() == 1 && sa.isCurse() && defense < 0) {
+                 if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard)
 diff --git a/forge-game/src/main/java/forge/game/GameAction.java b/forge-game/src/main/java/forge/game/GameAction.java
 index 112b9e8e..4e87a3b5 100644
 --- a/forge-game/src/main/java/forge/game/GameAction.java
