@@ -20,6 +20,8 @@ ap.add_argument("--rivals", type=int, default=2); ap.add_argument("--pods", type
 ap.add_argument("--seed", type=int, default=7); ap.add_argument("--games", type=int, default=3)
 ap.add_argument("--workers", type=int, default=2); ap.add_argument("--out", required=True)
 ap.add_argument("--forge", default=os.environ.get("FORGE_DIR", os.path.expanduser("~/forge")))
+ap.add_argument("--combos", default=os.path.join(HERE, "combos.txt"), help="engine combo file from export_combos.py ('' to disable)")
+ap.add_argument("--mode", default="realistic", choices=["realistic", "strict"], help="engine combo adjudication mode")
 ap.add_argument("--timeout", type=int, default=180, help="Forge per-game time limit in seconds (180 cuts run time ~25%%; slowest 11%% of games are scored as of the cutoff)")
 a = ap.parse_args()
 JAR = os.path.join(a.forge, "forge-gui-desktop/target/forge-gui-desktop-2.0.16-SNAPSHOT-jar-with-dependencies.jar")
@@ -35,7 +37,8 @@ for v in a.versions: os.makedirs(os.path.join(a.out, v), exist_ok=True)
 def run(job):
     i, seats, out = job; path = os.path.join(out, f"pod{i:03d}.log")
     if os.path.exists(path) and "Game Result" in open(path).read(): return
-    p = subprocess.run(["java", "-Xmx2g", "-Dfile.encoding=UTF-8", "-jar", JAR, "sim", "-d", *[s + ".dck" for s in seats],
+    props = [f"-Dreferee.combos={a.combos}", f"-Dreferee.mode={a.mode}"] if a.combos else []
+    p = subprocess.run(["java", "-Xmx2g", "-Dfile.encoding=UTF-8", *props, "-jar", JAR, "sim", "-d", *[s + ".dck" for s in seats],
                         "-D", os.path.join(HERE, "decks/forge"), "-f", "Commander", "-c", str(a.timeout), "-n", str(a.games)],
                        cwd=os.path.join(a.forge, "forge-gui"), capture_output=True, text=True)
     keep = [l for l in p.stdout.splitlines() if not l.lstrip().startswith("at ") and "JAVA_TOOL" not in l]

@@ -27,7 +27,8 @@ Run everything below from `lab/`.
 | `make_dck.py` | JSON list -> Forge `.dck`, with `KeyCards=` (the AI tutors for these first, in order) |
 | `opponents.py` | Opponent pool from EDHREC average decks + their decisive combos for the referee |
 | `pods.py` | Runs refereed four-player pods; every version plays the same seats and rivals (paired), resumable |
-| `referee.py` | Scores Forge logs: awards combo wins Forge's AI can't execute (strict and realistic modes) |
+| `export_combos.py` | Writes `combos.txt` for the engine: each deck's combos, key cards, protection spells, opponents' combos |
+| `referee.py` | Scores Forge logs: reads the engine's combo wins (or reconstructs them from the log for unpatched runs) |
 | `compare.py` | Paired head-to-head between versions with margins of error |
 
 Decks: grouped JSON lists in `lab/decks/lists/`, Forge decks in `lab/decks/forge/`, registry in `lab/decks.json`
@@ -50,11 +51,23 @@ your CPU count. A machine with 8 cores runs about 4x faster than the 2-core clou
 
 ## Forge patches (`forge/patches/forge-referee.patch`)
 
-1. **Battlefield logging:** Forge only logged permanents *leaving* play. Now it logs any permanent entering from anywhere but the stack
-   (Green Sun's Zenith, Chord, reanimation), plus bounces, so the referee sees tutored combo pieces.
-2. **Sacrifice hints:** `SacMe` on Eldrazi Spawn, Goat, Servo, Thopter and Squirrel tokens and Hangarback Walker, so the AI sacrifices fodder, not Blood Artist.
-3. **Sacrifice in response:** a new AI rule. When an opponent's removal is about to hit a creature, sacrifice it first to a free outlet
-   (Viscera Seer, Carrion Feeder, Yahenni… or Ashnod's Altar), so death triggers still happen. Applies to all AI players.
+Engine:
+1. **Combo adjudication** (`RefereeCombos.java`): Forge's AI can't execute loops, so the engine itself declares the win the moment a known
+   combo is live on its controller's turn: key card(s) plus every piece on the battlefield and 4+ lands. Opponents have already had their chance
+   to answer each piece as it was cast. Games end right there, so runs are about 2.5x faster. Combos come from `combos.txt` (`export_combos.py`),
+   passed as `-Dreferee.combos=...`. `-Dreferee.mode=strict` requires the pieces to have survived a full round. Opponents' combos are judged too.
+2. **Battlefield logging:** logs permanents entering from anywhere but the stack (tutors, reanimation) and bounces, for the log referee.
+
+AI:
+3. **Combo-aware tutoring** (`ComboAwareAi.java`): tutors fetch the card that leaves the fewest pieces missing, given the battlefield and hand.
+4. **Sacrifice in response:** when removal is about to hit a creature, sacrifice it first to a free outlet, so death triggers still happen.
+5. **Sacrifice hints:** `SacMe` on Spawn, Goat, Servo, Thopter and Squirrel tokens and Hangarback, so the AI sacrifices fodder, not payoffs.
+6. **Sacrifice-for-mana:** outlets like Ashnod's Altar count as normal mana sources while spare fodder tokens exist.
+7. **Protection discipline:** a deck's protection spells (its list's "Protection" group) are held until an opponent's spell or ability
+   threatens a combo piece or the commander (or targets our spell).
+8. **Combo-aware mulligans:** a 7-card opening hand with no combo piece and no tutor is mulliganed (free mulligan).
+
+After changing decks or `decks.json`, rerun `python3 export_combos.py` so the engine knows the combos.
 
 ## Lessons (read before trusting a number)
 

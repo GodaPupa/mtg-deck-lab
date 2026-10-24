@@ -40,7 +40,12 @@ def live(d, f, lands):
 
 def judged(p): return _ours(p) or p in OPP
 
+ENGINE = re.compile(r"REFEREE COMBO WIN: Ai\(\d\)-(.+?) :: (.+?) :: round (\d+)")
+
 def referee(chunk, winner, mode="strict"):
+    m = ENGINE.search(chunk)   # patched engine already adjudicated the combo and ended the game
+    if m:
+        return dict(winner=m.group(1), how="combo", round=int(m.group(3)), combo=m.group(2).split(" + "))
     bf = collections.defaultdict(collections.Counter)   # player -> names on battlefield
     pending = collections.defaultdict(list)            # name -> casters of spells on the stack
     active = None; lands = collections.Counter(); rnd = collections.Counter()
