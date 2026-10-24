@@ -75,3 +75,8 @@ Both cut Arcane Signet and Golgari Signet (ramp 12 to 10).
 Lean 50% vs main 26% (+0.71 wins/pod, se 0.19). **Pooled over both runs (44 pods): Lean 47% (62/131) vs main 28% (37/132),
 +0.57 wins/pod, se 0.16, z = 3.5.** The most decisive result so far. **Lean is the new main list** (`lf_lean.json`, ~$135, 10 ramp, 12 removal).
 Next test: "Leaner" (8 ramp, 14 removal: -Talisman of Resilience, -Nature's Lore, +Cut Down, +Bone Shards).
+
+## Leaner vs Lean (24 pods, seed 71, 72 games each)
+Leaner (-Talisman of Resilience, -Nature's Lore, +Cut Down, +Bone Shards; 8 ramp, 14 removal): 31% vs Lean 33%, -0.08 wins/pod (se 0.25), a tie.
+Leaner lost to Plunder Loop less (15 vs 21) but to Ur-Dragon more (11 vs 5), and failed to cast Long Feng in 8 losses vs 6.
+**10 ramp / 12 removal (Lean) is the sweet spot. Lean stays main.**
