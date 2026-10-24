@@ -30,5 +30,19 @@ Basking Broodscale was in 27 of 30 combo wins.
 
 ## Current recommendation
 **Budget list + Ashnod's Altar (for Insatiable Avarice), ~$141** — `decks/lists/lf_ash.json`.
-Ashnod's was chosen on judgment: it's the free outlet those 13 losses lacked. Pending: three-way test (budget vs Ashnod's vs recursion build
-with Unearth, Gravedigger and Cauldron of Essence) using the sacrifice-in-response AI.
+Ashnod's was chosen on judgment (the free outlet those 13 losses lacked), and the upgraded simulator backs it up.
+
+## Upgraded simulator (engine combo wins, combo-aware tutors, sacrifice-in-response, protection discipline, combo mulligans)
+Three-way test, 24 paired pods, 72 games each, seed 41. Games ran ~45 s on average (vs ~100 s before).
+| Version | Win rate | Strict | Combo wins | vs budget (wins/pod) |
+|---|---|---|---|---|
+| **Budget + Ashnod's Altar (~$141)** | **46% ±12** | 44% | 27 | +0.21 (se 0.23) |
+| Budget (~$129) | 39% ±11 | 39% | 25 | - |
+| + Ashnod's + recursion (Unearth, Gravedigger, Cauldron; cut Summoner's Pact, Roiling Regrowth, Entish Restoration) | 25% ±10 | 25% | 18 | -0.42 (se 0.25) |
+Plunder Loop: 31% across all 216 games (the engine now adjudicates its Glint-Horn loop).
+- The recursion package hurt. The AI rarely cast it, and Unearth hit Hammerhead and Yahenni, never Broodscale. The cards it replaced
+  (land-sacrifice ramp that triggers Long Feng, and Summoner's Pact for green pieces) were doing work.
+- The interim read from the old AI (recursion ahead at 8 pods) was noise. Wait for full runs.
+- Protection was cast only twice in 216 games under the new hold rule, so the gate may be too strict. Worth a look before testing protection packages.
+
+**Recommendation stands: budget + Ashnod's Altar (`lf_ash.json`).**
