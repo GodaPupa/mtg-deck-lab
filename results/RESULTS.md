@@ -46,3 +46,15 @@ Plunder Loop: 31% across all 216 games (the engine now adjudicates its Glint-Hor
 - Protection was cast only twice in 216 games under the new hold rule, so the gate may be too strict. Worth a look before testing protection packages.
 
 **Recommendation stands: budget + Ashnod's Altar (`lf_ash.json`).**
+
+## Redundancy vs interaction (same 24 pods as the Ashnod's baseline, seed 41, 72 games each)
+Both cut Three Visits and Harrow.
+| Version | Win rate | Combo wins | vs Ashnod's build (wins/pod) |
+|---|---|---|---|
+| Ashnod's build (baseline) | 46% ±12 | 27 | - |
+| + Fatal Push, Tragic Slip | 47% ±12 | 31 | +0.04 (se 0.21) |
+| + Phantom Train, Stonecoil Serpent | 33% ±11 | 22 | -0.38 (se 0.22) |
+- Redundancy hurt: more combos on paper, but the extra loop pieces are clunky, and losses to Plunder Loop rose from 16 to 22.
+- Interaction tied overall but added 4 combo wins. Forge's AI aimed the removal badly (mana elves, Siren Stormtamer), not at Glint-Horn or Malcolm,
+  so a human pilot should get more from it. Cutting two ramp spells cost nothing.
+- The list looks close to a local optimum for this AI. Single swaps move it within noise.
