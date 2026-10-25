@@ -1,0 +1,107 @@
+{
+ "Commander": [
+  "Rionya, Fire Dancer"
+ ],
+ "Combo": [
+  "Combat Celebrant",
+  "Port Razer",
+  "Bloodthirster",
+  "Godo, Bandit Warlord",
+  "Terror of the Peaks",
+  "Breath of Fury",
+  "Dualcaster Mage",
+  "Twinflame",
+  "Heat Shimmer",
+  "Kiki-Jiki, Mirror Breaker",
+  "Zealous Conscripts",
+  "Splinter Twin"
+ ],
+ "Tutors": [
+  "Gamble",
+  "Imperial Recruiter"
+ ],
+ "Value creatures": [
+  "Ragavan, Nimble Pilferer",
+  "Humble Defector",
+  "Seasoned Pyromancer",
+  "Goldspan Dragon",
+  "Professional Face-Breaker"
+ ],
+ "Flex": [
+  "Scourge of the Throne",
+  "Lotus Bloom",
+  "Thran Dynamo",
+  "Electroduplicate",
+  "Lightning Greaves",
+  "Caves of Chaos Adventurer",
+  "Light Up the Stage",
+  "Bolt Bend",
+  "Wheel of Misfortune",
+  "Treasonous Ogre",
+  "Magus of the Wheel",
+  "Everflowing Chalice",
+  "Mountain",
+  "Swiftfoot Boots",
+  "City of Traitors",
+  "Commune with Lava"
+ ],
+ "Draw": [
+  "Faithless Looting",
+  "Reckless Impulse",
+  "Wrenn's Resolve",
+  "Jeska's Will",
+  "Big Score",
+  "Unexpected Windfall",
+  "Underworld Breach",
+  "Experimental Frenzy",
+  "Final Fortune"
+ ],
+ "Rituals": [
+  "Pyretic Ritual",
+  "Seething Song",
+  "Rite of Flame",
+  "Strike It Rich",
+  "Geosurge"
+ ],
+ "Protection": [
+  "Deflecting Swat",
+  "Pyroblast",
+  "Red Elemental Blast",
+  "Tibalt's Trickery"
+ ],
+ "Interaction": [
+  "Abrade",
+  "Chaos Warp",
+  "Lightning Bolt",
+  "Blood Moon",
+  "Fury"
+ ],
+ "Mana rocks": [
+  "Sol Ring",
+  "Mana Vault",
+  "Chrome Mox",
+  "Lotus Petal",
+  "Grim Monolith",
+  "Arcane Signet",
+  "Fellwar Stone",
+  "Ruby Medallion",
+  "Fire Diamond",
+  "Coldsteel Heart",
+  "Mind Stone"
+ ],
+ "Lands": [
+  "Ancient Tomb",
+  "Urza's Saga",
+  "Valakut Awakening",
+  "Sundering Eruption",
+  "Pinnacle Monk",
+  "Arid Mesa",
+  "Bloodstained Mire",
+  "Wooded Foothills",
+  "Scalding Tarn",
+  "Prismatic Vista",
+  "Castle Embereth",
+  "Den of the Bugbear",
+  "18 Mountain"
+ ]
+}

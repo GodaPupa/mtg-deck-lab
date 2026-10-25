@@ -1,0 +1,99 @@
+{
+ "Commander": [
+  "Rionya, Fire Dancer"
+ ],
+ "Combo": [
+  "Combat Celebrant",
+  "Port Razer",
+  "Akki Battle Squad",
+  "Godo, Bandit Warlord",
+  "Breath of Fury",
+  "Dualcaster Mage",
+  "Twinflame",
+  "Heat Shimmer",
+  "Conqueror's Flail",
+  "Zealous Conscripts",
+  "Splinter Twin"
+ ],
+ "Exceptions": [
+  "Gamble",
+  "Imperial Recruiter",
+  "Bloodthirster"
+ ],
+ "Flex": [
+  "Scourge of the Throne",
+  "Lotus Bloom",
+  "Thran Dynamo",
+  "Electroduplicate",
+  "Reforge the Soul",
+  "Caves of Chaos Adventurer",
+  "Light Up the Stage",
+  "Bolt Bend",
+  "Wheel of Misfortune",
+  "4 Mountain",
+  "Everflowing Chalice",
+  "Magus of the Wheel"
+ ],
+ "Tutors": [
+  "Cathartic Reunion",
+  "Valakut Exploration"
+ ],
+ "Value creatures": [
+  "Humble Defector",
+  "Seasoned Pyromancer",
+  "Charming Scoundrel",
+  "Professional Face-Breaker"
+ ],
+ "Draw": [
+  "Faithless Looting",
+  "Reckless Impulse",
+  "Wrenn's Resolve",
+  "Battle Hymn",
+  "Big Score",
+  "Unexpected Windfall",
+  "Underworld Breach",
+  "Final Fortune"
+ ],
+ "Rituals": [
+  "Seething Song",
+  "Rite of Flame",
+  "Strike It Rich",
+  "Geosurge"
+ ],
+ "Protection": [
+  "Pyroblast",
+  "Red Elemental Blast",
+  "Defense Grid",
+  "Lightning Greaves",
+  "Swiftfoot Boots"
+ ],
+ "Interaction": [
+  "Abrade",
+  "Chaos Warp",
+  "Lightning Bolt",
+  "Blood Moon",
+  "Fury"
+ ],
+ "Mana rocks": [
+  "Sol Ring",
+  "Worn Powerstone",
+  "Prismatic Lens",
+  "Simian Spirit Guide",
+  "Desperate Ritual",
+  "Arcane Signet",
+  "Fellwar Stone",
+  "Mana Geyser",
+  "Fire Diamond",
+  "Coldsteel Heart",
+  "Mind Stone"
+ ],
+ "Lands": [
+  "25 Mountain",
+  "Sokenzan, Crucible of Defiance",
+  "Sundering Eruption",
+  "Pinnacle Monk",
+  "Crystal Vein",
+  "Castle Embereth",
+  "Den of the Bugbear"
+ ]
+}

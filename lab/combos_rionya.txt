@@ -1,0 +1,64 @@
+# deckName|key cards|no-same-turn cards|combo pieces
+Rionya Full|||Rionya, Fire Dancer;Combat Celebrant
+Rionya Full|||Rionya, Fire Dancer;Port Razer
+Rionya Full|||Rionya, Fire Dancer;Bloodthirster
+Rionya Full|||Rionya, Fire Dancer;Godo, Bandit Warlord
+Rionya Full|||Rionya, Fire Dancer;Scourge of the Throne
+Rionya Full|||Rionya, Fire Dancer;Breath of Fury
+Rionya Full|||Kiki-Jiki, Mirror Breaker;Zealous Conscripts
+Rionya Full|||Kiki-Jiki, Mirror Breaker;Combat Celebrant
+Rionya Full|||Splinter Twin;Zealous Conscripts
+Rionya Full|||Splinter Twin;Combat Celebrant
+PROTECT|Rionya Full|Deflecting Swat;Pyroblast;Red Elemental Blast;Tibalt's Trickery;Bolt Bend
+Rionya Budget|||Rionya, Fire Dancer;Combat Celebrant
+Rionya Budget|||Rionya, Fire Dancer;Port Razer
+Rionya Budget|||Rionya, Fire Dancer;Godo, Bandit Warlord
+Rionya Budget|||Rionya, Fire Dancer;Scourge of the Throne
+Rionya Budget|||Rionya, Fire Dancer;Breath of Fury
+Rionya Budget|||Rionya, Fire Dancer;Akki Battle Squad;Lightning Greaves
+Rionya Budget|||Rionya, Fire Dancer;Akki Battle Squad;Swiftfoot Boots
+Rionya Budget|||Rionya, Fire Dancer;Akki Battle Squad;Conqueror's Flail
+Rionya Budget|||Splinter Twin;Zealous Conscripts
+Rionya Budget|||Splinter Twin;Combat Celebrant
+PROTECT|Rionya Budget|Pyroblast;Red Elemental Blast;Bolt Bend
+Atraxa|||Innkeeper's Talent;Vraska, Betrayal's Sting
+Atraxa|||Vorinclex, Monstrous Raider;Vraska, Betrayal's Sting
+UrDragon|||Bladewing the Risen;Miirym, Sentinel Wyrm;Terror of the Peaks
+UrDragon|||Ancient Gold Dragon;Dragon Tempest
+Edgar|||Exquisite Blood;Vito, Thorn of the Dusk Rose
+Edgar|||Exquisite Blood;Sanguine Bond
+Edgar|||Bloodthirsty Conqueror;Vito, Thorn of the Dusk Rose
+Edgar|||Bloodthirsty Conqueror;Sanguine Bond
+Korvold|||Mahadi, Emporium Master;Revel in Riches;Viscera Seer
+Korvold|||Blood Artist;Pitiless Plunderer;Reassembling Skeleton;Warren Soultrader
+Korvold|||Pitiless Plunderer;Reassembling Skeleton;Warren Soultrader;Zulaport Cutthroat
+Korvold|||Old Gnawbone;Revel in Riches
+Korvold|||Blood Artist;Chatterfang, Squirrel General;Warren Soultrader
+Korvold|||Mahadi, Emporium Master;Phyrexian Altar;Revel in Riches
+Korvold|||Bootleggers' Stash;Revel in Riches
+Korvold|||Ashnod's Altar;Mahadi, Emporium Master;Revel in Riches
+Korvold|||Chatterfang, Squirrel General;Warren Soultrader;Zulaport Cutthroat
+Meren|||Gray Merchant of Asphodel;Mikaeus, the Unhallowed;Yawgmoth, Thran Physician
+Rionya Budget Plus|||Rionya, Fire Dancer;Combat Celebrant
+Rionya Budget Plus|||Rionya, Fire Dancer;Port Razer
+Rionya Budget Plus|||Rionya, Fire Dancer;Godo, Bandit Warlord
+Rionya Budget Plus|||Rionya, Fire Dancer;Scourge of the Throne
+Rionya Budget Plus|||Rionya, Fire Dancer;Breath of Fury
+Rionya Budget Plus|||Rionya, Fire Dancer;Akki Battle Squad;Lightning Greaves
+Rionya Budget Plus|||Rionya, Fire Dancer;Akki Battle Squad;Swiftfoot Boots
+Rionya Budget Plus|||Rionya, Fire Dancer;Akki Battle Squad;Conqueror's Flail
+Rionya Budget Plus|||Splinter Twin;Zealous Conscripts
+Rionya Budget Plus|||Splinter Twin;Combat Celebrant
+PROTECT|Rionya Budget Plus|Pyroblast;Red Elemental Blast;Bolt Bend
+Rionya Budget Plus|||Rionya, Fire Dancer;Bloodthirster
+Rionya BP Demon|||Rionya, Fire Dancer;Combat Celebrant
+Rionya BP Demon|||Rionya, Fire Dancer;Port Razer
+Rionya BP Demon|||Rionya, Fire Dancer;Godo, Bandit Warlord
+Rionya BP Demon|||Rionya, Fire Dancer;Scourge of the Throne
+Rionya BP Demon|||Rionya, Fire Dancer;Breath of Fury
+Rionya BP Demon|||Rionya, Fire Dancer;Akki Battle Squad;Lightning Greaves
+Rionya BP Demon|||Rionya, Fire Dancer;Akki Battle Squad;Swiftfoot Boots
+Rionya BP Demon|||Rionya, Fire Dancer;Akki Battle Squad;Conqueror's Flail
+Rionya BP Demon|||Splinter Twin;Zealous Conscripts
+Rionya BP Demon|||Splinter Twin;Combat Celebrant
+Rionya BP Demon|||Rionya, Fire Dancer;Bloodthirster
