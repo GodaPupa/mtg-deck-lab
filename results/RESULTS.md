@@ -100,3 +100,14 @@ Leaner lost to Plunder Loop less (15 vs 21) but to Ur-Dragon more (11 vs 5), and
 **Pooled over both random-pod runs (40 pods, 120 games each): Lean 38% (46/120) vs Shield 40% (48/120), +0.05 wins/pod, se 0.16, a tie.**
 Shield's first-run lead was noise. **Lean stays main.** Its realistic win rate in random four-player pods is ~38% (average seat 25%).
 The list is at a plateau for single swaps. Protection vs extra removal is now a table-dependent flex choice, not a strict upgrade.
+
+## Second combo routes (3 random rivals, 20 pods, seed 111, 60 games each)
+A search up to $80/card found no second two-piece Long Feng engine besides Basking Broodscale. The best independent routes were tested:
+| Version | Win rate | Combo wins | vs Lean (wins/pod) |
+|---|---|---|---|
+| **Lean** | **42% ±12** | 21 | - |
+| Garden: -Ugin's Conjurant, +Trudge Garden ($0.30; Ashnod's Altar + Trudge Garden + Blood Artist/Zulaport/Bastion/Falkenrath loop) | 35% ±12 | 21 | -0.20 (se 0.30) |
+| Bond: -Ugin's Conjurant, -Endless One, +Sanguine Bond, +Exquisite Blood (~$44) | 35% ±12 | 17 | -0.20 (se 0.25) |
+- The new routes won only 2 of 120 games: three-piece independent routes rarely assemble, while Broodscale only needs the commander.
+- Neither helps. **Lean stays main. The deck is at its ceiling for this shell and budget.**
+- export_combos.py now also exports independent table-wide combos, so future second-route tests are scored correctly.
