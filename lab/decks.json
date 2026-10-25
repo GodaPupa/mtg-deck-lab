@@ -122,5 +122,26 @@
       "Long Feng, Grand Secretariat"
     ],
     "dck": "GA_Bond"
+  },
+  "GA Untapped": {
+    "list": "decks/lists/lf_untap.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Untapped"
+  },
+  "GA Fetchy": {
+    "list": "decks/lists/lf_fetch.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Fetchy"
+  },
+  "GA 34": {
+    "list": "decks/lists/lf_34.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_34"
   }
 }
