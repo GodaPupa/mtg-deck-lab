@@ -90,3 +90,13 @@ Leaner lost to Plunder Loop less (15 vs 21) but to Ur-Dragon more (11 vs 5), and
 - **Realistic baseline: Lean wins 33% of random four-player pods** (25% = average seat). Only Edgar did better (42%, in 24 games).
 - The protection fix works: protection was cast 15 times in 60 games (vs 1-2 before), and Shield is the best version so far in random pods.
 - Draw engines help a little but are within noise. Confirmation run (seed 101): Lean vs Shield vs Shield+Draw ("LBoth", also cuts Zulaport Cutthroat, Bastion of Remembrance).
+
+## Confirmation: Lean vs Shield vs Shield+Draw (3 random rivals, 20 new pods, seed 101, 60 games each)
+| Version | Win rate | vs Lean (wins/pod) |
+|---|---|---|
+| Lean | 43% ±13 | - |
+| Shield | 37% ±12 | -0.20 (se 0.21) |
+| Shield + Draw (LBoth) | 38% ±12 | -0.15 (se 0.24) |
+**Pooled over both random-pod runs (40 pods, 120 games each): Lean 38% (46/120) vs Shield 40% (48/120), +0.05 wins/pod, se 0.16, a tie.**
+Shield's first-run lead was noise. **Lean stays main.** Its realistic win rate in random four-player pods is ~38% (average seat 25%).
+The list is at a plateau for single swaps. Protection vs extra removal is now a table-dependent flex choice, not a strict upgrade.
