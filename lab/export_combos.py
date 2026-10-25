@@ -15,12 +15,17 @@ def independent(deckset):
     """decisive, table-wide Spellbook combos made only of permanents in the deck, needing no commander"""
     out = set()
     for v in V:
-        if not v["dec"] or v["cmdr"] or len(v["cards"]) > 4: continue
+        if v["cmdr"] or len(v["cards"]) > 4: continue
         cs = [front(c) for c in v["cards"]]
         if not all(c in deckset for c in cs): continue
         if any(_re.search(r"Instant|Sorcery", C.get(_full.get(c, c), {"type": "Instant"})["type"]) for c in cs): continue
-        if all(("target opponent" in p or "target player" in p) for p in v["prod"] if any(w in p for w in ("lose", "damage", "lifeloss"))): continue
-        out.add(tuple(sorted(cs)))
+        if v["dec"]:
+            if all(("target opponent" in p or "target player" in p) for p in v["prod"] if any(w in p for w in ("lose", "damage", "lifeloss"))): continue
+            out.add(tuple(sorted(cs)))
+        else:   # infinite engine (e.g. Mazirek + Broodscale): pair it with a payoff the deck runs
+            for k in S.engine_kinds(v["prod"]):
+                for pay in S.PAYOFF[k]:
+                    if pay in deckset and pay not in cs: out.add(tuple(sorted(cs + [pay])))
     return out
 for name, r in reg.items():
     b = H.load(r["list"]); d = json.load(open(r["list"]))

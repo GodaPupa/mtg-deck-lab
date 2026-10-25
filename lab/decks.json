@@ -143,5 +143,19 @@
       "Long Feng, Grand Secretariat"
     ],
     "dck": "GA_34"
+  },
+  "GA Mazirek": {
+    "list": "decks/lists/lf_maz.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Mazirek"
+  },
+  "GA Engines": {
+    "list": "decks/lists/lf_eng.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Engines"
   }
 }
