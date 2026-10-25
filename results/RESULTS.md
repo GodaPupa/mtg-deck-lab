@@ -111,3 +111,13 @@ A search up to $80/card found no second two-piece Long Feng engine besides Baski
 - The new routes won only 2 of 120 games: three-piece independent routes rarely assemble, while Broodscale only needs the commander.
 - Neither helps. **Lean stays main. The deck is at its ceiling for this shell and budget.**
 - export_combos.py now also exports independent table-wide combos, so future second-route tests are scored correctly.
+
+## Land experiment, partial (stopped at 10 of 15 shared pods; 3 random rivals, seed 121, 30 games each)
+| Version | Win rate | Combo wins |
+|---|---|---|
+| **Lean (current lands)** | **40% ±18** | 12 |
+| Untapped: Undergrowth Stadium, Deathcap Glade, Necroblossom Snarl for Jungle Hollow, Golgari Guildgate, Reliquary Tower | 33% | 7 |
+| Fetchy: Undergrowth Stadium, Nurturing Peatland, Jund Panorama | 30% | 9 |
+| 34 lands (-Ugin's Conjurant, +Forest) | 30% | 6 |
+No land change beat the current mana base. Stopped early to free the CPUs for the backup-engine test; rerun `pods.py` with the same
+arguments (seed 121) to resume.
