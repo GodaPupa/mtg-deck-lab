@@ -108,5 +108,19 @@
       "Long Feng, Grand Secretariat"
     ],
     "dck": "GA_LBoth"
+  },
+  "GA Garden": {
+    "list": "decks/lists/lf_garden.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Garden"
+  },
+  "GA Bond": {
+    "list": "decks/lists/lf_bond.json",
+    "key": [
+      "Long Feng, Grand Secretariat"
+    ],
+    "dck": "GA_Bond"
   }
 }
