@@ -121,3 +121,12 @@ A search up to $80/card found no second two-piece Long Feng engine besides Baski
 | 34 lands (-Ugin's Conjurant, +Forest) | 30% | 6 |
 No land change beat the current mana base. Stopped early to free the CPUs for the backup-engine test; rerun `pods.py` with the same
 arguments (seed 121) to resume.
+
+## Backup engines, partial (stopped; 3 random rivals, seed 131)
+```
+16 shared pods
+GA Lean           48 games  realistic  33% ±13%  strict  33%  combo wins 16
+GA Mazirek        48 games  realistic  38% ±14%  strict  38%  combo wins 17  | vs GA Lean: +0.12 wins/pod (se 0.33)
+GA Engines        48 games  realistic  33% ±13%  strict  33%  combo wins 14  | vs GA Lean: +0.00 wins/pod (se 0.29)
+```
+Ties. Mazirek and Blade of the Bloodchief won through Long Feng-free combos only twice. **Final list: Lean (`decks/lists/lf_lean.json`).** Mazirek is an optional swap for Ugin's Conjurant.
